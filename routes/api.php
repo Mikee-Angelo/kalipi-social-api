@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post('/login', [ApiAuthController::class, 'login']);
+Route::post('/register', [ApiAuthController::class, 'register']);
+
+Route::group([
+    'middleware' => 'api'
+
+], function ($router){
+    Route::post('logout', [ApiAuthController::class, 'logout']);
+    Route::post('refresh', [ApiAuthController::class, 'refresh']);
+    Route::post('me', [ApiAuthController::class, 'me']);
 });
