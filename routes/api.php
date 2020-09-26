@@ -32,6 +32,9 @@ Route::group([
     Route::post('me', [ApiAuthController::class, 'me']);
 
     // POSTS
+    Route::post('/posts/create', [PostsController::class, 'create']);
+    Route::post('/posts/{posts_id}/destroy', [PostsController::class, 'destroy']);
+    Route::post('/posts/{posts_id}/update', [PostsController::class, 'update']);
     Route::post('/posts/{posts_id}', [PostsController::class, 'singlePosts']);
 
 });
