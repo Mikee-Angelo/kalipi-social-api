@@ -32,6 +32,6 @@ Route::group([
     Route::post('me', [ApiAuthController::class, 'me']);
 
     // POSTS
-    Route::post('/posts', [PostsController::class, 'singlePosts']);
+    Route::post('/posts/{posts_id}', [PostsController::class, 'singlePosts']);
 
 });
