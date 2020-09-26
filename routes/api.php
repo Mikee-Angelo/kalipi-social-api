@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,8 @@ Route::group([
     Route::post('logout', [ApiAuthController::class, 'logout']);
     Route::post('refresh', [ApiAuthController::class, 'refresh']);
     Route::post('me', [ApiAuthController::class, 'me']);
+
+    // POSTS
+    Route::post('/posts', [PostsController::class, 'singlePosts']);
+
 });
