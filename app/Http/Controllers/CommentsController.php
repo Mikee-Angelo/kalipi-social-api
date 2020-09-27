@@ -80,6 +80,37 @@ class CommentsController extends Controller
         ], 201);
     }
 
+    public function reply($posts_id, $comment_id, Request $request){
+        $data = Posts::where('id', $posts_id)->doesntExist();
+
+        if($data){ 
+            return response()->json([
+                'status' => false,
+                'message' => 'Item Not Found'
+            ], 400);
+        }
+
+        $data = $request->validate([
+            'comment_content' => ['required', 'string'],
+        ]);
+
+        if(!$data){ 
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        Comments::create([
+            'post_id' => $posts_id,
+            'comment_content' => $data['comment_content'],
+            'user_id' => $this->guard()->user()->id,
+            'comment_reply_to' => $comment_id
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Added Successfully'
+        ], 201);
+    }
+
     private function guard(){
         return Auth::guard('api');
     }
