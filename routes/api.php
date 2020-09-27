@@ -7,6 +7,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PostReactsController;
 use App\Http\Controllers\CommentReactsController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,7 @@ Route::group([
     //COMMENT REACT
     Route::post('/comments/{comment_id}/reacts/create', [CommentReactsController::class, 'create']);
     Route::post('/comments/{comment_id}/reacts/{comment_react_id}/destroy', [CommentReactsController::class, 'destroy']);
+
+    //SEARCHES 
+    Route::post('/search/{slug}', [SearchController::class, 'get']);
 });
