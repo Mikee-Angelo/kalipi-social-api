@@ -39,6 +39,7 @@ Route::group([
     Route::post('/posts/{posts_id}', [PostsController::class, 'getSinglePost']);
     Route::post('/posts/{posts_id}/update', [PostsController::class, 'update']);
     Route::post('/posts/{posts_id}/destroy', [PostsController::class, 'destroy']);
+    Route::post('/posts/{posts_id}/share', [PostsController::class, 'share']);
 
     //POST REACT
     Route::post('/posts/{post_id}/reacts/create', [PostReactsController::class, 'create']);
