@@ -5,13 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comments;
+use App\Models\Posts;
 
 class CommentsController extends Controller
 {
     //
     public function create($posts_id, Request $request){
+        $data = Posts::where('id', $post_id)->doesntExists();
+
+        if($data){ 
+            return response()->json([
+                'status' => false,
+                'message' => 'Item Not Found'
+            ], 400);
+        }
+
         $data = $request->validate([
-            'post_id' => ['required', 'numeric', 'exists:posts,id'],
             'comments_content' => ['required', 'string']
         ]);
 
@@ -20,7 +29,7 @@ class CommentsController extends Controller
         }
 
         Comments::create([
-            'post_id' => $data['post_id'],
+            'post_id' => $post_id,
             'comments_content' => $data['comments_content'],
             'user_id' => $this->guard()->user()->id,
         ]);
