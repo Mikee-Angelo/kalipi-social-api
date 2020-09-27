@@ -24,4 +24,12 @@ class Posts extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comments');
+    }
+
+    public function post_reacts(){
+        return $this->hasMany('App\Models\PostReacts');
+    }
 }
