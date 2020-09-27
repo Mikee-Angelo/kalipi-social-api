@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\PostReactsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +39,14 @@ Route::group([
     Route::post('/posts/{posts_id}/update', [PostsController::class, 'update']);
     Route::post('/posts/{posts_id}/destroy', [PostsController::class, 'destroy']);
 
+    //POST REACT
+    Route::post('/posts/{post_id}/reacts/create', [PostReactsController::class, 'create']);
+    Route::post('/posts/{post_id}/reacts/{post_react_id}/destroy', [PostReactsController::class, 'destroy']);
+
     //COMMENT
     Route::post('/comments/{posts_id}/create', [CommentsController::class, 'create']);
     Route::post('/comments/{comments_id}', [CommentsController::class, 'getSingleComment']);
     Route::post('/comments/{comments_id}/update', [CommentsController::class, 'updates']);
     Route::post('/comments/{comments_id}/destroy', [CommentsController::class, 'destroy']);
     
-
 });
