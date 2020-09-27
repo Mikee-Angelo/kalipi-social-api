@@ -37,7 +37,7 @@ class PostsController extends Controller
         ], 201);
     }
     
-    public function singlePosts($posts_id, Request $request){
+    public function getSinglePost($posts_id, Request $request){
         $posts = Posts::with('user')->findorFail($posts_id);
 
         return response()->json([
