@@ -58,7 +58,7 @@ class PostsController extends Controller
         ], 201);
     }
 
-    public function update(Request $request){
+    public function update($posts_id, Request $request){
 
         $data = $request->validate([
             'post_content' => ['required', 'string'],
