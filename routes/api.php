@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PostReactsController;
 use App\Http\Controllers\CommentReactsController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +59,8 @@ Route::group([
 
     //SEARCHES 
     Route::post('/search/{slug}', [SearchController::class, 'get']);
+
+    //Profile (Other Users)
+    Route::post('/profile/{id}', [UserController::class, 'get']);
+
 });
