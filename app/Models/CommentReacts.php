@@ -14,4 +14,7 @@ class CommentReacts extends Model
         'comment_id'
     ];
     
+    public function comment(){
+        return $this->belongsTo('App\Models\Comments');
+    }
 }
