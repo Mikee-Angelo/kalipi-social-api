@@ -23,4 +23,8 @@ class Comments extends Model
     public function comment_reacts(){
         return $this->hasMany('App\Models\CommentReacts');
     }
+
+    public function comment_reply_to(){
+        return $this->belongsTo('App\Models\Comments', 'comment_reply_to');
+    }
 }
