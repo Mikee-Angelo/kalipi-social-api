@@ -21,7 +21,7 @@ class PostReactsController extends Controller
         }
 
         PostReacts::create([
-            'post_id' => $data['post_id'],
+            'post_id' => $post_id,
             'user_id' => $this->guard()->user()->id,
         ]);
 
