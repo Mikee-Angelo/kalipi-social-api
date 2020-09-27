@@ -10,7 +10,7 @@ class CommentReactsController extends Controller
 {
     public function create($comment_id, Request $request){
 
-        $data = Comments::where('id', $comment_id)->doesntExists();
+        $data = Comments::where('id', $comment_id)->doesntExist();
 
         if($data){ 
             return response()->json([
@@ -31,7 +31,7 @@ class CommentReactsController extends Controller
     }
 
     public function destroy($comment_id, $comment_react_id, Request $request){
-        $data = Comments::where('id', $comment_id)->doesntExists();
+        $data = Comments::where('id', $comment_id)->doesntExist();
 
         if($data){ 
             return response()->json([
@@ -53,6 +53,6 @@ class CommentReactsController extends Controller
     }
 
     private function guard(){
-        return Auth::guard();
+        return Auth::guard('api');
     }
 }
