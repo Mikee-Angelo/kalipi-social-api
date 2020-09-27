@@ -13,5 +13,10 @@ class Searches extends Controller
             ['name', 'like', '%'.$slug.'%'],
             ['id', '!=', 1]
         ])->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $data,
+        ], 201);
     }
 }
