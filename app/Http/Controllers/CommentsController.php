@@ -11,7 +11,7 @@ class CommentsController extends Controller
 {
     //
     public function create($posts_id, Request $request){
-        $data = Posts::where('id', $post_id)->doesntExists();
+        $data = Posts::where('id', $posts_id)->doesntExist();
 
         if($data){ 
             return response()->json([
@@ -21,7 +21,7 @@ class CommentsController extends Controller
         }
 
         $data = $request->validate([
-            'comments_content' => ['required', 'string']
+            'comment_content' => ['required', 'string']
         ]);
 
         if(!$data){ 
@@ -29,8 +29,8 @@ class CommentsController extends Controller
         }
 
         Comments::create([
-            'post_id' => $post_id,
-            'comments_content' => $data['comments_content'],
+            'post_id' => $posts_id,
+            'comment_content' => $data['comment_content'],
             'user_id' => $this->guard()->user()->id,
         ]);
 
@@ -51,8 +51,7 @@ class CommentsController extends Controller
 
     public function update($comments_id, Request $request){
         $data = $request->validate([
-            'comments_id' => ['required', 'numeric', 'exists:comments,id'],
-            'comments_content' => ['required', 'string']
+            'comment_content' => ['required', 'string']
         ]);
 
         if(!$data){ 
@@ -60,7 +59,7 @@ class CommentsController extends Controller
         }
 
         Comments::where('id', $comments_id)->update([
-            'comments_content' => $data['comments_content'],
+            'comment_content' => $data['comment_content'],
         ]);
 
         return response()->json([
@@ -82,6 +81,6 @@ class CommentsController extends Controller
     }
 
     private function guard(){
-        return Auth::guard();
+        return Auth::guard('api');
     }
 }

@@ -38,11 +38,20 @@ class PostsController extends Controller
     }
     
     public function getSinglePost($posts_id, Request $request){
-        $posts = Posts::with('user')->findorFail($posts_id);
+        $posts = Posts::with('user', 'comments')->findorFail($posts_id);
 
         return response()->json([
             'status' => true,
-            'data' => $posts
+            'data' => $posts->makeHidden('user_id')
+        ], 201);
+    }
+
+    public function getAllPost(Request $request){
+        $posts = Posts::with('share_from', 'comments')->where('user_id', $this->guard()->user()->id)->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $posts->makeHidden('user_id')
         ], 201);
     }
 
@@ -86,9 +95,9 @@ class PostsController extends Controller
         ], 201);
     }
 
-    public function share($post_id, Request $request){
+    public function share($posts_id, Request $request){
 
-        $data = Posts::where('id', $post_id)->doesntExists();
+        $data = Posts::where('id', $posts_id)->doesntExist();
 
         if($data){ 
             return response()->json([
@@ -114,7 +123,7 @@ class PostsController extends Controller
             'post_privacy' => $data['post_privacy'] ,
             'post_feelings' => $data['post_feelings'], //needs to be in feelings table
             'post_location' => $data['post_location'],
-            'share_from' => $post_id,
+            'share_from' => $posts_id,
             'active' => 1,
         ]);
 

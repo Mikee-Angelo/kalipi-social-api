@@ -18,6 +18,7 @@ class Posts extends Model
         'post_privacy',
         'post_feelings',
         'post_location',
+        'share_from',
         'active',
     ];
 
@@ -26,7 +27,7 @@ class Posts extends Model
     }
 
     public function comments(){
-        return $this->hasMany('App\Models\Comments');
+        return $this->hasMany('App\Models\Comments', 'post_id');
     }
 
     public function post_reacts(){
@@ -34,6 +35,6 @@ class Posts extends Model
     }
 
     public function share_from(){
-        return $this->hasOne('App\Models\Posts', 'id');
+        return $this->belongsTo('App\Models\Posts', 'share_from');
     }
 }

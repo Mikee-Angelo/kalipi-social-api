@@ -39,18 +39,19 @@ Route::group([
     // POST
     Route::post('/posts/create', [PostsController::class, 'create']);
     Route::post('/posts/{posts_id}', [PostsController::class, 'getSinglePost']);
+    Route::post('/posts', [PostsController::class, 'getAllPost']);
     Route::post('/posts/{posts_id}/update', [PostsController::class, 'update']);
     Route::post('/posts/{posts_id}/destroy', [PostsController::class, 'destroy']);
     Route::post('/posts/{posts_id}/share', [PostsController::class, 'share']);
 
     //POST REACT
-    Route::post('/posts/{post_id}/reacts/create', [PostReactsController::class, 'create']);
-    Route::post('/posts/{post_id}/reacts/{post_react_id}/destroy', [PostReactsController::class, 'destroy']);
+    Route::post('/posts/{posts_id}/reacts/create', [PostReactsController::class, 'create']);
+    Route::post('/posts/{posts_id}/reacts/{post_react_id}/destroy', [PostReactsController::class, 'destroy']);
 
     //COMMENT
     Route::post('/comments/{posts_id}/create', [CommentsController::class, 'create']);
     Route::post('/comments/{comments_id}', [CommentsController::class, 'getSingleComment']);
-    Route::post('/comments/{comments_id}/update', [CommentsController::class, 'updates']);
+    Route::post('/comments/{comments_id}/update', [CommentsController::class, 'update']);
     Route::post('/comments/{comments_id}/destroy', [CommentsController::class, 'destroy']);
     
     //COMMENT REACT
@@ -60,7 +61,7 @@ Route::group([
     //SEARCHES 
     Route::post('/search/{slug}', [SearchController::class, 'get']);
 
-    //Profile (Other Users)
+    //PROFILE (OTHER USERS)
     Route::post('/profile/{id}', [UserController::class, 'get']);
 
 });

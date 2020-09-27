@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PostReacts;
 use App\Models\Posts;
+use Illuminate\Support\Facades\Auth;
 
 class PostReactsController extends Controller
 {
     //
     public function create($posts_id, Request $request){
 
-        $data = Posts::where('id', $posts_id)->doesntExists();
+        $data = Posts::where('id', $posts_id)->doesntExist();
 
         if($data){ 
             return response()->json([
@@ -21,7 +22,7 @@ class PostReactsController extends Controller
         }
 
         PostReacts::create([
-            'post_id' => $post_id,
+            'post_id' => $posts_id,
             'user_id' => $this->guard()->user()->id,
         ]);
 
@@ -31,8 +32,8 @@ class PostReactsController extends Controller
         ], 201);
     }
 
-    public function destroy($post_id, $post_react_id, Request $request){
-        $data = Posts::where('id', $post_id)->doesntExists();
+    public function destroy($posts_id, $post_react_id, Request $request){
+        $data = Posts::where('id', $posts_id)->doesntExist();
 
         if($data){ 
             return response()->json([
@@ -43,7 +44,7 @@ class PostReactsController extends Controller
 
         PostReacts::where([
             ['user_id', '=', $this->guard()->user()->id],
-            ['post_id', '=', $post_id],
+            ['post_id', '=', $posts_id],
             ['id', '=', $post_react_id]
         ])->delete();
 
@@ -54,6 +55,6 @@ class PostReactsController extends Controller
     }
 
     private function guard(){
-        return Auth::guard();
+        return Auth::guard('api');
     }
 }
