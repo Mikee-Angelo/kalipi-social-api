@@ -53,6 +53,7 @@ Route::group([
     Route::post('/comments/{comments_id}', [CommentsController::class, 'getSingleComment']);
     Route::post('/comments/{comments_id}/update', [CommentsController::class, 'update']);
     Route::post('/comments/{comments_id}/destroy', [CommentsController::class, 'destroy']);
+    Route::post('/comments/{posts_id}/reply/{comments_id}', [CommentsController::class, 'reply']);
     
     //COMMENT REACT
     Route::post('/comments/{comment_id}/reacts/create', [CommentReactsController::class, 'create']);
