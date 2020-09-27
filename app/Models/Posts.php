@@ -32,4 +32,8 @@ class Posts extends Model
     public function post_reacts(){
         return $this->hasMany('App\Models\PostReacts');
     }
+
+    public function share_from(){
+        return $this->hasOne('App\Models\Posts', 'id');
+    }
 }
