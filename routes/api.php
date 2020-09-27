@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PostReactsController;
+use App\Http\Controllers\CommentReactsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,4 +50,7 @@ Route::group([
     Route::post('/comments/{comments_id}/update', [CommentsController::class, 'updates']);
     Route::post('/comments/{comments_id}/destroy', [CommentsController::class, 'destroy']);
     
+    //COMMENT REACT
+    Route::post('/comments/{comment_id}/reacts/create', [CommentReactsController::class, 'create']);
+    Route::post('/comments/{comment_id}/reacts/{comment_react_id}/destroy', [CommentReactsController::class, 'destroy']);
 });
