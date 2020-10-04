@@ -10,6 +10,7 @@ use App\Http\Controllers\CommentReactsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\EventUsersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,6 +36,8 @@ Route::group([
     Route::post('logout', [ApiAuthController::class, 'logout']);
     Route::post('refresh', [ApiAuthController::class, 'refresh']);
     Route::post('me', [ApiAuthController::class, 'me']);
+    Route::post('/me/events', [EventUsersController::class, 'getAll']);
+    Route::post('/me/events/{events_id}', [EventUsersController::class, 'getSingle']);
 
     // POST
     Route::post('/posts/create', [PostsController::class, 'create']);
@@ -71,4 +74,6 @@ Route::group([
     Route::post('/events/{event_id}', [EventsController::class, 'get']);
     Route::post('/events/{events_id}/update', [EventsController::class, 'update']);
     Route::post('/events/{events_id}/destroy', [EventsController::class, 'destroy']);
+    //EVENT USERS
+    Route::post('/events/{events_id}/join', [EventUsersController::class, 'create']);
 });
