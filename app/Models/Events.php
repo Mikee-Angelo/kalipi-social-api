@@ -19,4 +19,8 @@ class Events extends Model
         'event_payment',
         'event_payment_type',
     ];
+
+    public function event_users(){
+        return $this->hasMany('App\Models\EventUsers');
+    }
 }
