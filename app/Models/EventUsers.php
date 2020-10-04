@@ -13,4 +13,12 @@ class EventUsers extends Model
         'user_id',
         'event_id',
     ];
+
+    public function event(){
+        return $this->belongsTo('App\Models\Events');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
 }
