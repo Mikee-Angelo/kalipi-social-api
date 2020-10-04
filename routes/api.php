@@ -11,6 +11,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\EventUsersController;
+use App\Http\Controllers\FollowsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -74,6 +75,11 @@ Route::group([
     Route::post('/events/{event_id}', [EventsController::class, 'get']);
     Route::post('/events/{events_id}/update', [EventsController::class, 'update']);
     Route::post('/events/{events_id}/destroy', [EventsController::class, 'destroy']);
+
     //EVENT USERS
     Route::post('/events/{events_id}/join', [EventUsersController::class, 'create']);
+
+    //Add Friend
+    Route::post('/u/{user_id}/follow', [FollowsController::class, 'create']);
+    Route::post('/u/{user_id}/unfollow', [FollowsController::class, 'delete']);
 });
