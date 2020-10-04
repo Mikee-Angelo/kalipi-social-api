@@ -46,7 +46,7 @@ class CommentsController extends Controller
         return response()->json([
             'status' => true,
             'data' => $comments
-        ], 201);
+        ], 200);
     }
 
     public function update($comments_id, Request $request){
@@ -58,7 +58,8 @@ class CommentsController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        Comments::where('id', $comments_id)->update([
+        $comments = Comments::findOrFail($comments_id);
+        $comments->update([
             'comment_content' => $data['comment_content'],
         ]);
 

@@ -9,7 +9,7 @@ use App\Http\Controllers\PostReactsController;
 use App\Http\Controllers\CommentReactsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\EventsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -65,4 +65,10 @@ Route::group([
     //PROFILE (OTHER USERS)
     Route::post('/profile/{id}', [UserController::class, 'get']);
 
+    //EVENTS
+    Route::post('/events/create', [EventsController::class, 'create']);
+    Route::post('/events', [EventsController::class, 'getAll']);
+    Route::post('/events/{event_id}', [EventsController::class, 'get']);
+    Route::post('/events/{events_id}/update', [EventsController::class, 'update']);
+    Route::post('/events/{events_id}/destroy', [EventsController::class, 'destroy']);
 });
